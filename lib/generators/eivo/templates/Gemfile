@@ -1,0 +1,40 @@
+source 'https://rubygems.org'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+
+ruby '2.6.3'
+
+gem 'rails', '~> 5.2.3'
+gem 'pg', '>= 0.18', '< 2.0'
+gem 'puma', '~> 3.11'
+
+group :development, :test do
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+end
+
+group :development do
+  gem 'listen', '>= 3.0.5', '< 3.2'
+end
+
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+group :development, :test do
+  gem 'derailed_benchmarks'
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'rspec-rails'
+  gem 'brakeman'
+  gem 'rubocop'
+  gem 'rubocop-rspec'
+  gem 'webmock'
+end
+
+gem 'eivo-rails-api'
+
+gem 'rack-cors'
+gem 'jwt'
+
+gem 'validates_email_format_of'
+gem 'validates_phone_format_of'
+gem 'validates_timeliness'
+
+### EIVO ###

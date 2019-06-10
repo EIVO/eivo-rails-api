@@ -1,0 +1,3 @@
+Initialize default files
+
+  rails g eivo:install

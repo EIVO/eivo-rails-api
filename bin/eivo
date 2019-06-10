@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'eivo-rails-api/cli'
+
+EIVO::CLI.start
