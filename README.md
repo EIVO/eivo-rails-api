@@ -1,5 +1,7 @@
 # EIVO Rails API
 
+[![Gem Version](https://badge.fury.io/rb/eivo-rails-api.svg)](http://badge.fury.io/rb/eivo-rails-api)
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -34,3 +36,7 @@ Add missing credentials:
 sentry:
   dsn: ""
 ```
+
+## License
+
+This project is released under the MIT license. See the LICENSE file for more info.
