@@ -23,7 +23,7 @@ module EIVO
         if Rails.env.development?
           raise e
         else
-          ::Raven.capture_exception(exception)
+          ::Raven.capture_exception(e)
         end
         render_internal_server_error(e)
       end
