@@ -64,11 +64,13 @@ EOF
 
       header_production = <<-'EOF'
 #!/usr/bin/env bash
+export RACK_ENV="production"
 export RAILS_ENV="production"
 
 EOF
       header_staging = <<-'EOF'
 #!/usr/bin/env bash
+export RACK_ENV="staging"
 export RAILS_ENV="staging"
 
 EOF
