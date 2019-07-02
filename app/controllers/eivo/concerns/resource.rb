@@ -48,10 +48,6 @@ module EIVO
         raise NotImplementedError
       end
 
-      def collection_index
-        collection
-      end
-
       def serializer
         raise NotImplementedError
       end
