@@ -20,7 +20,7 @@ module EIVO
       rescue ::ActionController::ParameterMissing => e
         render_parameter_missing(e)
       rescue ::StandardError => e
-        if Rails.env.development?
+        if Rails.env.development? || Rails.env.test?
           raise e
         else
           ::Raven.capture_exception(e)
