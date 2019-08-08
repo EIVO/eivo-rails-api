@@ -39,7 +39,7 @@ sentry:
 
 ### Warning
 
-SSL / TLS must be managed by the web server (nginx), don't enable `force_ssl` option.
+`force_ssl` option is not enabled, for performance reasons SSL / TLS should be managed by the web server (nginx, Apache).
 
 ## License
 
