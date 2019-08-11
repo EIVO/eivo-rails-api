@@ -5,7 +5,6 @@ module EIVO
 
     include EIVO::Concerns::Exception
     include EIVO::Concerns::Rendering
-    include EIVO::Concerns::Pagination
 
     # doesn't work
     # rescue_from ::ActiveRecord::RecordNotFound, with: :render_not_found

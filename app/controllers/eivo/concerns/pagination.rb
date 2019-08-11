@@ -5,6 +5,20 @@ module EIVO
     module Pagination
       extend ::ActiveSupport::Concern
 
+      def paginate(collection)
+        unless ::ActiveModel::Type::Boolean.new.cast(params[:pagination]) == false
+          limit = 50
+          if params[:limit]
+            limit = [[params[:limit].to_i, 1].max, 500].min
+          end
+
+          collection = collection.page(params[:page]).per(limit)
+          @serializer_options.merge!(pagination_options(collection))
+        end
+
+        collection
+      end
+
       def pagination_options(collection)
         options = {
           is_collection: true,

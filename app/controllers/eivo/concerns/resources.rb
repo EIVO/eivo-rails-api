@@ -5,24 +5,30 @@ module EIVO
     module Resources
       extend ::ActiveSupport::Concern
 
+      include EIVO::Concerns::Pagination
+
       included do
         before_action :set_default_serializer_options
       end
 
-      def index
+      def index(options = {})
         @objects ||= collection_index
 
-        unless ::ActiveModel::Type::Boolean.new.cast(params[:pagination]) == false
-          limit = 50
-          if params[:limit]
-            limit = [[params[:limit].to_i, 1].max, 500].min
+        @objects = paginate(@objects) unless options[:paginate] == false
+
+        if options[:cache] && options[:cache] != false
+          if options[:cache].is_a?(Hash)
+            cache_options = options[:cache]
+          else
+            cache_options =  {}
+          end            
+
+          if stale?(@objects, public: cache_options.fetch(:public, false))
+            render_success serializer.new(@objects, @serializer_options)
           end
-
-          @objects = @objects.page(params[:page]).per(limit)
-          @serializer_options.merge!(pagination_options(@objects))
+        else
+          render_success serializer.new(@objects, @serializer_options)
         end
-
-        render_success serializer.new(@objects, @serializer_options)
       end
 
       def show
