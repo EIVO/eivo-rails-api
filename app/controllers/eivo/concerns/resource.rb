@@ -15,7 +15,9 @@ module EIVO
       end
 
       def create
-        @object ||= collection.new(object_params_create)
+        @object ||= collection.new
+        @object.assign_attributes(object_params_create)
+
         if @object.save
           render_success serializer.new(@object, @serializer_options)
         else
@@ -25,7 +27,9 @@ module EIVO
 
       def update
         @object ||= collection
-        if @object.update(object_params_update)
+        @object.assign_attributes(object_params_update)
+
+        if @object.save
           render_success serializer.new(@object, @serializer_options)
         else
           render_model_errors @object.errors

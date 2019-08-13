@@ -2,7 +2,7 @@ $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |spec|
   spec.name          = 'eivo-rails-api'
-  spec.version       = '0.0.6'
+  spec.version       = '0.0.7'
   spec.authors       = ['Jonathan VUKOVICH-TRIBOUHARET']
   spec.email         = ['jonathan@eivo.co']
 
