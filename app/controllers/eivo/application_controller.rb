@@ -2,7 +2,6 @@
 
 module EIVO
   class ApplicationController < ::ActionController::API
-
     include EIVO::Concerns::Exception
     include EIVO::Concerns::Rendering
 
@@ -24,9 +23,9 @@ module EIVO
         else
           ::Raven.capture_exception(e)
         end
+
         render_internal_server_error(e)
       end
     end
-
   end
 end

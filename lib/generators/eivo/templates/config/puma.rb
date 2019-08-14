@@ -4,9 +4,9 @@ workers ENV.fetch('WEB_CONCURRENCY') { 0 }
 threads_count = ENV.fetch('RAILS_MAX_THREADS') { 5 }
 threads threads_count, threads_count
 
-environment ENV.fetch('RAILS_ENV') { "development" }
+environment ENV.fetch('RAILS_ENV') { 'development' }
 
-if ['production', 'staging'].include?(ENV['RAILS_ENV'])
+if %w[production staging].include?(ENV['RAILS_ENV'])
   bind 'unix://tmp/sockets/puma.sock'
   pidfile 'tmp/pids/puma.pid'
   state_path 'tmp/pids/puma.state'

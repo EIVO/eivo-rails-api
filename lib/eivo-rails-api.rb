@@ -15,7 +15,7 @@ module EIVO
     def configure(application)
       application.config.load_defaults 5.2
       application.config.api_only = true
-      
+
       application.config.require_master_key = true
 
       application.config.generators do |g|

@@ -6,7 +6,7 @@ module EIVO
   class InstallGenerator < Rails::Generators::Base
     include Rails::Generators::Migration
 
-    source_root File.expand_path('../templates', __FILE__)
+    source_root File.expand_path('templates', __dir__)
 
     def self.namespace(name = nil)
       @namespace ||= super.sub('e_i_v_o', 'eivo')
@@ -27,6 +27,7 @@ module EIVO
       copy_file 'Procfile'
       copy_file '.env.example'
       copy_file '.ruby-version'
+      copy_file '.rubocop.yml'
 
       create_restart_files
 
@@ -46,34 +47,35 @@ module EIVO
     end
 
     def create_restart_files
-      restart_code = <<-'EOF'
-### EIVO begin ###
+      restart_code = <<~'EIVO_COMMAND'
+        ### EIVO begin ###
 
-bundle exec pumactl -F config/puma.rb restart
+        bundle exec pumactl -F config/puma.rb restart
 
-### EIVO end ###
-EOF
+        ### EIVO end ###
+      EIVO_COMMAND
 
-      stop_code = <<-'EOF'
-### EIVO begin ###
+      stop_code = <<~'EIVO_COMMAND'
+        ### EIVO begin ###
 
-bundle exec pumactl -F config/puma.rb stop
+        bundle exec pumactl -F config/puma.rb stop
 
-### EIVO end ###
-EOF
+        ### EIVO end ###
+      EIVO_COMMAND
 
-      header_production = <<-'EOF'
-#!/usr/bin/env bash
-export RACK_ENV="production"
-export RAILS_ENV="production"
+      header_production = <<~'EIVO_COMMAND'
+        #!/usr/bin/env bash
+        export RACK_ENV="production"
+        export RAILS_ENV="production"
 
-EOF
-      header_staging = <<-'EOF'
-#!/usr/bin/env bash
-export RACK_ENV="staging"
-export RAILS_ENV="staging"
+      EIVO_COMMAND
 
-EOF
+      header_staging = <<~'EIVO_COMMAND'
+        #!/usr/bin/env bash
+        export RACK_ENV="staging"
+        export RAILS_ENV="staging"
+
+      EIVO_COMMAND
 
       create_file 'restart_production.sh', header_production, skip: true
       create_file 'stop_production.sh', header_production, skip: true
@@ -93,11 +95,10 @@ EOF
       inject_into_file 'restart_staging.sh', restart_code, after: header_staging
       inject_into_file 'stop_staging.sh', stop_code, after: header_staging
 
-      chmod 'restart_production.sh', 0755
-      chmod 'stop_production.sh', 0755
-      chmod 'restart_staging.sh', 0755
-      chmod 'stop_staging.sh', 0755
+      chmod 'restart_production.sh', 0o755
+      chmod 'stop_production.sh', 0o755
+      chmod 'restart_staging.sh', 0o755
+      chmod 'stop_staging.sh', 0o755
     end
-
   end
 end

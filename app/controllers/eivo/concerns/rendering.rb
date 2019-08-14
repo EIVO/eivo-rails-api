@@ -3,7 +3,6 @@
 module EIVO
   module Concerns
     module Rendering
-
       extend ::ActiveSupport::Concern
 
       def render_success(serializer = nil)
@@ -17,19 +16,19 @@ module EIVO
         end
       end
 
-      def render_unauthorized(exception = nil)
+      def render_unauthorized(_exception = nil)
         render_error 'unauthorized', status: :unauthorized
       end
 
-      def render_forbidden(exception = nil)
+      def render_forbidden(_exception = nil)
         render_error 'forbidden', status: :forbidden
       end
 
-      def render_not_found(exception = nil)
+      def render_not_found(_exception = nil)
         render_error 'not_found', status: :not_found
       end
 
-      def render_internal_server_error(exception)
+      def render_internal_server_error(_exception)
         render_error 'internal_server_error', status: :internal_server_error
       end
 
@@ -38,8 +37,8 @@ module EIVO
       end
 
       def render_model_errors(errors)
-        json_errors = errors.details.map do |attribute, errors|
-          errors.map do |error|
+        json_errors = errors.details.map do |attribute, attribute_errors|
+          attribute_errors.map do |error|
             {
               code: error[:error],
               source: {
@@ -67,7 +66,6 @@ module EIVO
         }
         render json: ::MultiJson.dump(data), status: status
       end
-
     end
   end
 end

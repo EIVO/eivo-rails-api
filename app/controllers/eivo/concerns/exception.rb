@@ -3,7 +3,6 @@
 module EIVO
   module Concerns
     module Exception
-
       extend ::ActiveSupport::Concern
 
       included do
@@ -17,7 +16,6 @@ module EIVO
           request_id: request.request_id
         )
       end
-
     end
   end
 end

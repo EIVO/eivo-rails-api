@@ -46,8 +46,8 @@ module EIVO
         end
       end
 
-    protected
-      
+      protected
+
       def collection
         raise NotImplementedError
       end
@@ -67,11 +67,10 @@ module EIVO
       def object_params_update
         object_params
       end
-    
+
       def set_default_serializer_options
         @serializer_options ||= {}
       end
-
     end
   end
 end

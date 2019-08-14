@@ -17,11 +17,11 @@ module EIVO
         @objects = paginate(@objects) unless options[:paginate] == false
 
         if options[:cache] && options[:cache] != false
-          if options[:cache].is_a?(Hash)
-            cache_options = options[:cache]
-          else
-            cache_options =  {}
-          end            
+          cache_options = if options[:cache].is_a?(Hash)
+                            options[:cache]
+                          else
+                            {}
+                          end
 
           if stale?(@objects, public: cache_options.fetch(:public, false))
             render_success serializer.new(@objects, @serializer_options)
@@ -68,8 +68,8 @@ module EIVO
         end
       end
 
-    protected
-      
+      protected
+
       def collection
         raise NotImplementedError
       end
@@ -97,7 +97,6 @@ module EIVO
       def set_default_serializer_options
         @serializer_options ||= {}
       end
-
     end
   end
 end
