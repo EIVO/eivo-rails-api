@@ -32,7 +32,7 @@ module EIVO
       end
 
       def show
-        @object ||= collection.find(params[:id])
+        @object ||= collection_show.find(params[:id])
         render_success serializer.new(@object, @serializer_options)
       end
 
@@ -72,6 +72,10 @@ module EIVO
 
       def collection
         raise NotImplementedError
+      end
+
+      def collection_show
+        collection
       end
 
       def collection_index
