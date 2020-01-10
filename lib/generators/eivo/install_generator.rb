@@ -19,7 +19,7 @@ module EIVO
     end
 
     def create_initializer_file
-      @application = Rails.application.class.parent_name
+      @application = Rails.application.class.module_parent_name
 
       remove_dir 'config/environments'
 
