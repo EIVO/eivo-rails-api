@@ -88,6 +88,9 @@ Performance/ChainArrayAllocation:
 
 # Rails
 
+Rails/ApplicationController:
+  Enabled: false
+
 Rails/BulkChangeTable:
   Enabled: false
 
