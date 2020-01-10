@@ -22,7 +22,7 @@ Or install it yourself as:
 
 If you don't have a Ruby On Rails project:
 
-	$ rails new ../example/ -d postgresql --skip-yarn --skip-active-storage --skip-action-cable --skip-sprockets --skip-spring --skip-coffee --skip-javascript --skip-turbolinks --skip-test --skip-system-test --skip-bootsnap --skip-action-mailer --api
+	$ rails new ../example/ -d postgresql --api --skip-action-mailer --skip-action-mailbox --skip-action-text --skip-active-storage --skip-action-cable --skip-sprockets --skip-spring --skip-javascript --skip-turbolinks --skip-test --skip-system-test --skip-bootsnap --skip-webpack-install
 
 Then:
 

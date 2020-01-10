@@ -13,7 +13,7 @@ require_relative 'eivo-rails-api/engine'
 module EIVO
   class << self
     def configure(application)
-      application.config.load_defaults 5.2
+      application.config.load_defaults 6.0
       application.config.api_only = true
 
       application.config.require_master_key = true
