@@ -67,6 +67,7 @@ module EIVO
         #!/usr/bin/env bash
         export RACK_ENV="production"
         export RAILS_ENV="production"
+        export RAILS_DAEMONIZE="true"
 
       EIVO_COMMAND
 
@@ -74,6 +75,7 @@ module EIVO
         #!/usr/bin/env bash
         export RACK_ENV="staging"
         export RAILS_ENV="staging"
+        export RAILS_DAEMONIZE="true"
 
       EIVO_COMMAND
 

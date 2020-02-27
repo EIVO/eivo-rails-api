@@ -10,7 +10,7 @@ if %w[production staging].include?(ENV['RAILS_ENV'])
   bind 'unix://tmp/sockets/puma.sock'
   pidfile 'tmp/pids/puma.pid'
   state_path 'tmp/pids/puma.state'
-  daemonize true
+  daemonize ENV['RAILS_DAEMONIZE'].present?
 else
   port ENV.fetch('PORT') { 3000 }
 end
