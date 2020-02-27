@@ -33,8 +33,8 @@ module EIVO
 
       template 'config/application.rb'
       copy_file 'config/puma.rb'
-      template 'config/database.example.yml'
-      template 'config/database.example.yml', 'config/database.yml', skip: true
+      copy_file 'config/database.example.yml'
+      template 'config/database.local.yml', 'config/database.yml', skip: true
 
       copy_file 'app/controllers/application_controller.rb'
 

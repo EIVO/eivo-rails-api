@@ -1,0 +1,22 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%%= ENV.fetch('DATABASE_POOL') { 5 } %>
+  host: db
+  username: postgres
+
+development:
+  <<: *default
+  database: <%= @application.parameterize %>_development
+
+test:
+  <<: *default
+  database: <%= @application.parameterize %>_test
+
+staging:
+  <<: *default
+  database: <%= @application.parameterize %>_staging
+
+production:
+  <<: *default
+  database: <%= @application.parameterize %>
