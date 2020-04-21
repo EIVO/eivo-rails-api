@@ -7,10 +7,15 @@ threads threads_count, threads_count
 environment ENV.fetch('RAILS_ENV') { 'development' }
 
 if %w[production staging].include?(ENV['RAILS_ENV'])
-  bind 'unix://tmp/sockets/puma.sock'
   pidfile 'tmp/pids/puma.pid'
   state_path 'tmp/pids/puma.state'
-  daemonize ENV['RAILS_DAEMONIZE'].present?
+  daemonize !ENV['RAILS_DAEMONIZE'].nil?
+
+  if ENV['PORT']
+    bind "tcp://0.0.0.0:#{ENV['PORT']}"
+  else
+    bind 'unix://tmp/sockets/puma.sock'
+  end
 else
   port ENV.fetch('PORT') { 3000 }
 end
