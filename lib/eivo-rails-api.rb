@@ -9,6 +9,7 @@ require 'fast_jsonapi'
 require 'kaminari'
 
 require_relative 'eivo-rails-api/engine'
+require_relative 'eivo-rails-api/formatter'
 
 module EIVO
   class << self

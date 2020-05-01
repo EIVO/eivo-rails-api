@@ -65,9 +65,15 @@ module EIVO
         # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
         if ENV['RAILS_LOG_TO_STDOUT'].present?
-          logger           = ActiveSupport::Logger.new(STDOUT)
+          # logger           = ActiveSupport::Logger.new(STDOUT)
+          # logger.formatter = config.log_formatter
+          # config.logger    = ActiveSupport::TaggedLogging.new(logger)
+
+          config.log_formatter = ::EIVO::Formatter.new
+          logger = ActiveSupport::Logger.new(STDOUT)
           logger.formatter = config.log_formatter
-          config.logger    = ActiveSupport::TaggedLogging.new(logger)
+          config.log_level = :info
+          config.logger = logger
         end
 
         # Do not dump schema after migrations.
