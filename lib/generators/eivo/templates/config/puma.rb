@@ -9,7 +9,7 @@ environment ENV.fetch('RAILS_ENV') { 'development' }
 if %w[production staging].include?(ENV['RAILS_ENV'])
   pidfile 'tmp/pids/puma.pid'
   state_path 'tmp/pids/puma.state'
-  daemonize !ENV['RAILS_DAEMONIZE'].nil?
+  daemonize ENV.fetch('RAILS_DAEMONIZE') { false }
 
   if ENV['PORT']
     bind "tcp://0.0.0.0:#{ENV['PORT']}"
