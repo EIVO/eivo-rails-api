@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'lograge'
+
 if Rails.env.staging? || Rails.env.production?
   Rails.application.configure do
     config.colorize_logging = false
