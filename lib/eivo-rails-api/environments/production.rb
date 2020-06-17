@@ -16,7 +16,7 @@ module EIVO
         config.eager_load = true
 
         # Full error reports are disabled and caching is turned on.
-        config.consider_all_requests_local       = false
+        config.consider_all_requests_local = false
 
         # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
         # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).
@@ -31,11 +31,11 @@ module EIVO
 
         # Specifies the header that your server uses for sending files.
         # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
-        config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
+        # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
         # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
         config.force_ssl = true
-        config.ssl_options = { redirect: { exclude: -> request { request.path == '/status' } } }
+        config.ssl_options = { redirect: { exclude: ->(request) { request.path == '/status' } } }
 
         # Use the lowest log level to ensure availability of diagnostic information
         # when problems arise.
@@ -47,7 +47,7 @@ module EIVO
         # Use a different cache store in production.
         # config.cache_store = :mem_cache_store
 
-        # Use a real queuing backend for Active Job (and separate queues per environment)
+        # Use a real queuing backend for Active Job (and separate queues per environment).
         # config.active_job.queue_adapter     = :resque
         # config.active_job.queue_name_prefix = "example_#{Rails.env}"
 
@@ -74,7 +74,7 @@ module EIVO
           logger = ActiveSupport::Logger.new(STDOUT)
           logger.formatter = config.log_formatter
           config.log_level = :info
-          config.logger = logger
+          config.logger    = logger
         end
 
         # Do not dump schema after migrations.

@@ -44,9 +44,6 @@ Naming/PredicateName:
 Naming/VariableNumber:
   EnforcedStyle: snake_case
 
-Style/BracesAroundHashParameters:
-  EnforcedStyle: context_dependent
-
 Style/Documentation:
   Enabled: false
 

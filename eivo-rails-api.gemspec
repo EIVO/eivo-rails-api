@@ -27,8 +27,8 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'kaminari'
 
-  spec.add_dependency 'sentry-raven'
   spec.add_dependency 'lograge'
+  spec.add_dependency 'sentry-raven'
 
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake'
