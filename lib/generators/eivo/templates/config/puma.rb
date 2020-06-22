@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-workers ENV.fetch('WEB_CONCURRENCY') { 0 }
-threads_count = ENV.fetch('RAILS_MAX_THREADS') { 5 }
+workers ENV.fetch('WEB_CONCURRENCY') { 0 }.to_i
+threads_count = ENV.fetch('RAILS_MAX_THREADS') { 5 }.to_i
 threads threads_count, threads_count
 
 environment ENV.fetch('RAILS_ENV') { 'development' }
@@ -9,7 +9,7 @@ environment ENV.fetch('RAILS_ENV') { 'development' }
 if %w[production staging].include?(ENV['RAILS_ENV'])
   pidfile 'tmp/pids/puma.pid'
   state_path 'tmp/pids/puma.state'
-  daemonize ENV.fetch('RAILS_DAEMONIZE') { false }
+  daemonize ActiveModel::Type::Boolean.new.cast(ENV.fetch('RAILS_DAEMONIZE') { false })
 
   if ENV['PORT']
     bind "tcp://0.0.0.0:#{ENV['PORT']}"
@@ -17,7 +17,7 @@ if %w[production staging].include?(ENV['RAILS_ENV'])
     bind 'unix://tmp/sockets/puma.sock'
   end
 else
-  port ENV.fetch('PORT') { 3000 }
+  port ENV.fetch('PORT') { 3000 }.to_i
 end
 
 before_fork do
