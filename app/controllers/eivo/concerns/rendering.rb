@@ -52,9 +52,11 @@ module EIVO
         render_errors json_errors.flatten
       end
 
-      def render_error(code, status: :bad_request, source: nil)
+      def render_error(code, status: :bad_request, title: nil, detail: nil, source: nil)
         render_errors([{
           code: code,
+          title: title,
+          detail: detail,
           source: source,
           status: ::Rack::Utils::SYMBOL_TO_STATUS_CODE[status].to_s
         }.compact], status: status)
