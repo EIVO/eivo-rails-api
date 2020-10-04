@@ -16,13 +16,11 @@ if Rails.env.staging? || Rails.env.production?
     config.lograge.ignore_actions = ['EIVO::StatusController#index']
 
     config.lograge.custom_options = ->(event) do
-      result = {
-        params: event.payload[:params].except('controller', 'action', 'format'),
-        request_id: event.payload[:request_id]
-      }
+      result = event.payload || {}
 
-      result[:user_id] = event.payload[:user_id] if event.payload[:user_id]
-      result[:organization_id] = event.payload[:organization_id] if event.payload[:organization_id]
+      if result[:params]
+        result[:params] = result[:params].except('controller', 'action', 'format')
+      end
 
       # https://github.com/roidrage/lograge/pull/307
       if event.respond_to?(:allocations)
