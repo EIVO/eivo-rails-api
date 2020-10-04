@@ -16,8 +16,11 @@ if Rails.env.staging? || Rails.env.production?
     config.lograge.ignore_actions = ['EIVO::StatusController#index']
 
     config.lograge.custom_options = ->(event) do
-      result = event.payload || {}
+      result = event.payload.dup || {}
 
+      result.delete(:headers)
+
+      # Removed because already present in event.payload
       if result[:params]
         result[:params] = result[:params].except('controller', 'action', 'format')
       end
